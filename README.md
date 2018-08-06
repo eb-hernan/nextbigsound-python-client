@@ -22,3 +22,9 @@ Note: If one missed install it via `brew` or `easy_install` (install global pack
 4. Install the dependencies `pip2 install -r requirements.txt`
 
 5. Deactivate virtual environment once done `deactivate`
+
+## Getting artists with NextBigSound API
+
+1. Add the token in the env variables to be used in the python script `export NEXT_BIG_SOUND_TOKEN="YOUR_PRIVATE_TOKEN"`
+
+2. Test `python test_client.py`

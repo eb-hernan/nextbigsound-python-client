@@ -6,6 +6,10 @@ from utils import (
     hms_string,
 )
 
+from nbs_client import (
+    get_artists,
+)
+
 user_token = os.environ.get('NEXT_BIG_SOUND_TOKEN')
 
 def main(argv):
@@ -18,8 +22,9 @@ def main(argv):
 
     count_artist = 0
 
-
-
+    for artist in get_artists():
+        count_artist += 1
+        print('Artist {0}: {1} \n'.format(count_artist, artist))
 
     elapsed_time = time.time() - start_time
 
