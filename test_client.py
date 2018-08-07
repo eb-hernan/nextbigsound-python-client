@@ -22,7 +22,10 @@ def main(argv):
 
     count_artist = 0
 
-    for artist in get_artists():
+    for artist in get_artists(
+        max_chart_releases = 1,
+        max_chart_appearances = 5,
+    ):
         count_artist += 1
         print('Artist {0}: {1} \n'.format(count_artist, artist))
 

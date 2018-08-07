@@ -81,8 +81,33 @@ def get_artists(max_chart_releases = 5, max_chart_appearances = 5, logging = Fal
                         'name': artist_json['name'],
                         'genres': artist_json['genres'],
                         'images': artist_json['images'],
+                        'social_media_links': artist_json['endpointUrls'],
                     }
                 except KeyError:
                     print('ERROR Appearance: {0}'.format(req.json()))
 
                 yield artist
+
+def get_artist(id):
+    artist_url = 'https://api.nextbigsound.com/artists/{0}/?accessToken={1}'.format(id, user_token)
+
+    # Get artist https://api.nextbigsound.com/artists/1300829/?accessToken=
+    print('Requesting Artist URL: {0} \n'.format(artist_url))
+
+    req = requests.get(artist_url)
+
+    artist_json = req.json()
+
+    if artist_json.get('errors'):
+        print('Artist {0}: '.format(id) + artist_json['errors'][0]['message'])
+        return None
+
+    artist = {
+        'id': artist_json['id'],
+        'name': artist_json['name'],
+        'genres': artist_json['genres'],
+        'images': artist_json['images'],
+        'social_media_links': artist_json['endpointUrls'],
+    }
+
+    return artist
