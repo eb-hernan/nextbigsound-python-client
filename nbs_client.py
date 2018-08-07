@@ -4,7 +4,7 @@ import requests
 
 user_token = os.environ.get('NEXT_BIG_SOUND_TOKEN')
 
-def get_artists(max_chart_releases = 5, max_chart_appearances = 5, logging = False):
+def get_artists(max_chart_releases = 5, max_chart_appearances = 5, logging = True):
 
     count_chart_releases = 0
     count_chart_appearances = 0
@@ -18,7 +18,7 @@ def get_artists(max_chart_releases = 5, max_chart_appearances = 5, logging = Fal
 
     for chart in charts:
         if logging:
-            print('Chart: {0} \n'.format(chart))
+            print('Requesting chart: {0}\n'.format(chart['self']['url']))
 
         # Get chart https://api.nextbigsound.com/charts/1/?accessToken=
         req = requests.get(chart['self']['url'])
@@ -39,7 +39,7 @@ def get_artists(max_chart_releases = 5, max_chart_appearances = 5, logging = Fal
             count_chart_releases += 1
             release_url = release['self']['url']
             if logging:
-                print('Release: {0} \n'.format(release_url))
+                print('Requesting release: {0}\n'.format(release_url))
 
             # Get release https://api.nextbigsound.com/charts/1/releases/2018-08-03/?accessToken=
             req = requests.get(release_url)
@@ -60,7 +60,7 @@ def get_artists(max_chart_releases = 5, max_chart_appearances = 5, logging = Fal
                 count_chart_appearances += 1
                 appearance_url = appearance['self']['url']
                 if logging:
-                    print('Appearance URL: {0} \n'.format(appearance_url))
+                    print('Requesting appearance: {0}\n'.format(appearance_url))
 
                 # Get appearance https://api.nextbigsound.com/charts/1/releases/2018-08-03/appearances/1/?accessToken=
                 req = requests.get(appearance_url)
@@ -92,7 +92,7 @@ def get_artist(id):
     artist_url = 'https://api.nextbigsound.com/artists/{0}/?accessToken={1}'.format(id, user_token)
 
     # Get artist https://api.nextbigsound.com/artists/1300829/?accessToken=
-    print('Requesting Artist URL: {0} \n'.format(artist_url))
+    print('Requesting Artist: {0}\n'.format(artist_url))
 
     req = requests.get(artist_url)
 

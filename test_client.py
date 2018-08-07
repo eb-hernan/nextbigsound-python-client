@@ -10,6 +10,9 @@ from nbs_client import (
     get_artists,
 )
 
+DEFAULT_MAX_RELEASES = 5
+DEFAULT_MAX_APPEARANCES = 5
+
 user_token = os.environ.get('NEXT_BIG_SOUND_TOKEN')
 
 def main(argv):
@@ -18,13 +21,24 @@ def main(argv):
         print 'Missing NEXT_BIG_SOUND_TOKEN environment variable'
         sys.exit(2)
 
+    max_releases = DEFAULT_MAX_RELEASES
+    max_appearances = DEFAULT_MAX_APPEARANCES
+
+    try:
+        max_releases = int(argv[0])
+        max_appearances = int(argv[1])
+    except Exception:
+        pass
+
+    print('\nGetting {} releases with {} appearances\n'.format(max_releases, max_appearances))
+
     start_time = time.time()
 
     count_artist = 0
 
     for artist in get_artists(
-        max_chart_releases = 1,
-        max_chart_appearances = 5,
+        max_chart_releases=max_releases,
+        max_chart_appearances=max_appearances,
     ):
         count_artist += 1
         print('Artist {0}: {1} \n'.format(count_artist, artist))

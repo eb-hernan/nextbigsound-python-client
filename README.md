@@ -27,6 +27,6 @@ Note: If one missed install it via `brew` or `easy_install` (install global pack
 
 1. Add the token in the env variables to be used in the python script `export NEXT_BIG_SOUND_TOKEN="YOUR_PRIVATE_TOKEN"`
 
-2. Test `python test_client.py`, getting charts, releases, appearances and then artists.
+2. Test `python test_client.py [amount_of_charts] [amount_of_releases]`, getting charts, releases, appearances and then artists.
 
 3. Test `python test_client_2.py [amount_of_artists] [initial_artist_id]`, getting artists directly by generating the ids automatically.

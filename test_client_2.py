@@ -59,9 +59,9 @@ def main(argv):
 
     print('Elapsed time: {}'.format(hms_string(elapsed_time)))
     print('Artists parsed begining at {}: {} from {}'.format(initial_artist, count_artist, max_artists))
-    print('Artists without images: {} from {}'.format(artist_without_images, max_artists))
-    print('Artists without genres: {} from {}'.format(artist_without_genres, max_artists))
-    print('Artists without social_media_links: {} from {}'.format(artist_without_social_media_links, max_artists))
+    print('Artists without images: {} from {}'.format(artist_without_images, count_artist))
+    print('Artists without genres: {} from {}'.format(artist_without_genres, count_artist))
+    print('Artists without social_media_links: {} from {}'.format(artist_without_social_media_links, count_artist))
 
 if __name__ == '__main__':
    main(sys.argv[1:])
