@@ -29,4 +29,4 @@ Note: If one missed install it via `brew` or `easy_install` (install global pack
 
 2. Test `python test_client.py`, getting charts, releases, appearances and then artists.
 
-3. Test `python test_client_2.py`, getting artists directly by genering the ids automatically.
+3. Test `python test_client_2.py [amount_of_artists]`, getting artists directly by genering the ids automatically.
