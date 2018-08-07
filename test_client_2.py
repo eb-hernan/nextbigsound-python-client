@@ -11,6 +11,7 @@ from nbs_client import (
 )
 
 DEFAULT_MAX_ARTISTS = 100
+DEFAULT_INITIAL_ARTIST = 1
 
 user_token = os.environ.get('NEXT_BIG_SOUND_TOKEN')
 
@@ -21,14 +22,15 @@ def main(argv):
         sys.exit(2)
 
     max_artists = DEFAULT_MAX_ARTISTS
+    initial_artist = DEFAULT_INITIAL_ARTIST
 
-    if len(argv) >= 1:
-        try:
-            max_artists = int(argv[0])
-        except ValueError:
-            pass
+    try:
+        max_artists = int(argv[0])
+        initial_artist = int(argv[1])
+    except Exception:
+        pass
 
-    print('Generating {} artist ids'.format(max_artists))
+    print('\nGenerating {} artist ids starting at {}\n'.format(max_artists, initial_artist))
 
     start_time = time.time()
 
@@ -37,7 +39,7 @@ def main(argv):
     artist_without_genres = 0
     artist_without_social_media_links = 0
 
-    for artist_id in xrange(1, max_artists + 1):
+    for artist_id in xrange(initial_artist, initial_artist + max_artists):
         artist = get_artist(id=artist_id)
 
         if artist:
@@ -56,7 +58,7 @@ def main(argv):
     elapsed_time = time.time() - start_time
 
     print('Elapsed time: {}'.format(hms_string(elapsed_time)))
-    print('Artists Parsed: {} from {}'.format(count_artist, max_artists))
+    print('Artists parsed begining at {}: {} from {}'.format(initial_artist, count_artist, max_artists))
     print('Artists without images: {} from {}'.format(artist_without_images, max_artists))
     print('Artists without genres: {} from {}'.format(artist_without_genres, max_artists))
     print('Artists without social_media_links: {} from {}'.format(artist_without_social_media_links, max_artists))
